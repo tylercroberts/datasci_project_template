@@ -26,15 +26,23 @@ else
 fi
 
 # Makes all the files/folders that are invarient wrt. project type
+# `.gitkeep` files are to store the entire file structure in Git.
 touch LICENSE
 touch README.md
 mkdir data
   mkdir data/raw
+    touch data/raw/.gitkeep
   mkdir data/processed
+    touch data/processed/.gitkeep
   mkdir data/processing
+    touch data/processing/.gitkeep
 mkdir docs
+  touch docs/.gitkeep
 mkdir notebooks
+  touch notebooks/.gitkeep
+
 mkdir references
+  touch references/.gitkeep
 mkdir src
   mkdir src/dataio
   mkdir src/models
@@ -98,21 +106,28 @@ fi
 # --------------------- Set up Type-based Files/Folders ------------------- #
 if [ $TYPE = "DA" ]
 then
-  mkdir models
   mkdir reports
-    mkdir figures
+    mkdir reports/figures
+      touch reports/figures/.gitkeep
+  touch src/dataio/.gitkeep
+  touch src/models/.gitkeep
+  touch src/features/.gitkeep
+  touch src/features/.gitkeep
 
 elif [ $TYPE = "DT" ]
 then
   mkdir examples
+    touch examples/.gitkeep
   touch setup.py
   touch src/__init__.py
   mkdir src/utils
+    touch src/utils/.gitkeep
   touch src/dataio/dataread.py
   touch src/dataio/datadown.py
   touch src/features/preprocessing.py
   touch src/models/predict.py
   touch src/models/train.py
+  touch src/visualization/visualize.py
 
 # Create template for setup.py file
 echo "import os
