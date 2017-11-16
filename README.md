@@ -1,4 +1,4 @@
-# DSCI522_lab1_script_tcroberts
+# Data Science Project Template
 
 This script creates a cookie-cutter project template for data analysis. It automatically generates folders to organize project files including data I/O & manipulation, model training/fitting, and visualization.
 
@@ -8,7 +8,7 @@ In all empty folders, a `.gitkeep` file is created upon initialization in order 
 
 The general directory structure is:
 ```
-├── LICENSE
+├── LICENSE              <- Current supports automatically initializing MIT or BSD licenses
 ├── README.md            <- The top-level README for this project
 ├── .gitignore           <- .gitignore file if you wish to create a git repository. Only created if $GITCHECK == Y
 ├── data
@@ -20,7 +20,7 @@ The general directory structure is:
 │
 ├── notebooks            <- Jupyter notebooks - either tutorials for the tool, or interactive analysis.
 │
-├── references           <- Data dictionaries, manuals, etc.
+├── references           <- Data dictionaries, manuals, citations, etc.
 │
 ├── src                  <- Source code for use in this project.
 │   │
@@ -57,17 +57,17 @@ Adds the following folders/files to the root of the project directory
 |   |
 │   ├── dataio           
 │   │   ├── dataread.py
-│   │   └── datadown.py
+│   │   └── datadown.py   <- Data downloading/API scraping script.
 │   │
 │   ├── features        
-│   │   └── preprocessing.py
+│   │   └── preprocessing.py   <- Cleaning, transforming, and outputting data.
 │   │
 │   ├── models                           
-│   │   ├── train.py
-│   │   └── predict.py
+│   │   ├── train.py      <- Model training
+│   │   └── predict.py    <- Model fitting
 │   │
 │   └── visualization
-        └── visualize.py
+        └── visualize.py    <- Creating graphics based on analysis of your model
 ```
 
 Written by Tyler Roberts on November 16th 2017
