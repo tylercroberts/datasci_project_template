@@ -7,6 +7,18 @@ echo "Hello, "$USER". What is your project's name? (no spaces please!)"
 read PROJ # Takes input, sets the project directory name
 echo "Please enter the path: (no '/' at the end). 'pwd' for present directory"
 read PROJPATH # Sets the path to the parent folder of your project
+if [ $PROJPATH != "pwd" ] # Error handling for mistyped/non-existent directories
+then
+  while [ ! -d $PROJPATH ]
+  do
+    echo "Error, no such directory, try again"
+    read PROJPATH
+    if [ $PROJPATH = "pwd" ]
+    then
+      break
+    fi
+  done
+fi
 echo "Is this project for Data Analysis (DA) or a Data Tool (DT)?"
 read TYPE # Determines the type of project you are creating
 echo "What type of license would you like to use? (BSD and MIT currently supported)."
