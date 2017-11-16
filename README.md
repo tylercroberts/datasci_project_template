@@ -4,6 +4,8 @@ This script creates a cookie-cutter project template for data analysis. It autom
 
 There are no arguments fed to this script from the command line. All required inputs are asked for during run-time.
 
+In all empty folders, a `.gitkeep` file is created upon initialization in order to ensure that all folders can be pushed to Git.
+
 The general directory structure is:
 ```
 ├── LICENSE
@@ -35,8 +37,6 @@ The general directory structure is:
 ##### DA:
 Adds the following folders to the root of the project directory
 ```
-├── models             <- Jupyter notebooks - either tutorials for the tool, or interactive analysis.
-│
 ├── reports            <- Non-interactive reports (PDF, HTML, etc.)
 │   │
 │   └──figures         <- Figures for use with files in the reports directory
