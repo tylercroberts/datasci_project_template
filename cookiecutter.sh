@@ -7,11 +7,10 @@ echo "Hello, "$USER". What is your project's name? (no spaces please!)"
 read PROJ # Takes input, sets the project directory name
 echo "Please enter the path: (no '/' at the end). 'pwd' for present directory"
 read PROJPATH # Sets the path to the parent folder of your project
-echo "Is this project for Data Analysis (DA) or Data Tool (DT)?"
+echo "Is this project for Data Analysis (DA) or a Data Tool (DT)?"
 read TYPE # Determines the type of project you are creating
 echo "What type of license would you like to use? (BSD and MIT currently supported)."
 read LICTYPE # Reads in License Type. Currently only BSD Supported.
-ABSPATH=`pwd` # Sets a variable to the absolute path of our project
 YEAR=`date +%Y` # Sets a variable for te current year.
 # -------------------------------------------------------------------------- #
 
@@ -24,6 +23,7 @@ else
   mkdir $PROJPATH/$PROJ
   cd $PROJPATH/$PROJ
 fi
+ABSPATH=`pwd` # Sets a variable to the absolute path of our project
 
 # Makes all the files/folders that are invarient wrt. project type
 # `.gitkeep` files are to store the entire file structure in Git.
@@ -50,7 +50,7 @@ mkdir src
   mkdir src/visualization
 echo "# $PROJ Written by: $USER" >> README.md # Initialize README.md
 
-# -------------- Set up License Based on previously set type ------------- #
+# -------------- Set up License based on previously set type ------------- #
 if [ $LICTYPE = "BSD" ]
 then
   echo "Copyright (c) $YEAR, $USER

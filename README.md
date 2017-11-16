@@ -2,7 +2,12 @@
 
 This script creates a cookie-cutter project template for data analysis. It automatically generates folders to organize project files including data I/O & manipulation, model training/fitting, and visualization.
 
-There are no arguments fed to this script from the command line. All required inputs are asked for during run-time.
+There are no arguments fed to this script from the command line. All required inputs are asked for during run-time. You will be asked for:
+* Name
+* Project Title
+* Desired Path
+* Type of Project
+* Desired License Type
 
 In all empty folders, a `.gitkeep` file is created upon initialization in order to ensure that all folders can be pushed to Git.
 
