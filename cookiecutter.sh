@@ -27,6 +27,7 @@ do
   read TYPE
 done
 <<<<<<< HEAD
+<<<<<<< HEAD
 while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]  && [ ! $TYPE = "NN" ]
 do
   echo "$TYPE is not a currently supported project type.
@@ -44,6 +45,9 @@ do
 done
 echo "What type of license would you like to use?
 (For a list of supported licenses, type HELP)."
+=======
+echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
+>>>>>>> parent of 8f393d8... Error handling, help responses
 =======
 echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
 >>>>>>> parent of 8f393d8... Error handling, help responses
@@ -201,8 +205,11 @@ then
   touch src/models/predict.py
   touch src/models/train.py
   touch src/visualization/visualize.py
+<<<<<<< HEAD
   echo "import numpy as np
   import matplotlib.pyplot as plt" >> src/visualization/visualize.py
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 
 # Create template for setup.py file
 echo "import os
@@ -231,6 +238,7 @@ setup(
     include_package_data=True
 )" >> setup.py
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     setup(
         name='$PROJ',
@@ -278,10 +286,13 @@ setup(
   fi
 =======
 >>>>>>> parent of 8f393d8... Error handling, help responses
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 # --------------- Setup paths for preprocessing.py scripts --------------- #
   echo "input_path = $ABSPATH/data/raw" >> src/features/preprocessing.py
   echo "output_path = $ABSPATH/data/processed" >> src/features/preprocessing.py
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 elif [ $TYPE = "NN" ]
 then
@@ -465,6 +476,8 @@ then
       )" >> setup.py
     fi
   fi
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 =======
 >>>>>>> parent of 8f393d8... Error handling, help responses
 else
