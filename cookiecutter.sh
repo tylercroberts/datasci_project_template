@@ -19,21 +19,15 @@ then
     fi
   done
 fi
-echo "Is this project for Data Analysis (DA), a Data Tool (DT) or Neural Network (NN)?
-(For a list of all alternative project types, type HELP)"
+echo "Is this project for Data Analysis (DA) or a Data Tool (DT)? (Packages coming soon)"
 read TYPE  # Determines the type of project you are creating
-while [ $TYPE = "HELP" ]
+while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]
 do
-  echo "Currently supported project types are:
-  DA -- Data Analysis. Generally consist of interactive projects exploring a dataset,
-  DT -- Data Tool. Packages or libraries for a solution to data problems.
-  NN -- Coming soon. Specialized directory structure for building NN architectures/models."
+  echo "$TYPE is not a currently supported project type"
   read TYPE
 done
 <<<<<<< HEAD
-=======
 <<<<<<< HEAD
->>>>>>> parent of 765db3b... reversion
 while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]  && [ ! $TYPE = "NN" ]
 do
   echo "$TYPE is not a currently supported project type.
@@ -46,34 +40,22 @@ do
       DA -- Data Analysis. Generally consist of interactive projects exploring a dataset,
       DT -- Data Tool. Packages or libraries for a solution to data problems.
       NN -- Coming soon. Specialized directory structure for building NN architectures/models."
+      read TYPE
     done
 done
 echo "What type of license would you like to use?
 (For a list of supported licenses, type HELP)."
-<<<<<<< HEAD
-=======
 =======
 echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
 >>>>>>> parent of 8f393d8... Error handling, help responses
->>>>>>> parent of 765db3b... reversion
+=======
+echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
+>>>>>>> parent of 8f393d8... Error handling, help responses
 read LICTYPE  # Reads in License Type. Currently BSD and MIT Supported.
-while [ $LICTYPE = "HELP" ]
-do
-  echo "Available license types are:
-  BSD -- Requires all redistributed code to also be licensed under BSD.,
-  MIT -- Requires all redistributed code to preserver copyright & license notices, and have same license.,
-  AGPL3 -- Requires complete source code and same license for redistribution.,
-  GPL -- Requires complete source code and same license. Contributors provide express grant of patent rights.,
-  LGPL -- Less strict form of GPL for redistribution.,
-  MOZILLA -- Weak copyleft. Limitations for trademark use. Must disclose source.,
-  APACHE -- Preservation of copyright and lincense notices, changes must be stated.,
-  UNLICENSE -- No conditions whatsoever, work is public domain.
-
-  If you do not want a license to be initialized for you, type anything else."
-  read LICTYPE
-done
 YEAR=`date +%Y`  # Sets a variable for the current year.
-# -------------------------------------------------------------------------- #
+
+
+# ------------------------------ Begin Setup ------------------------------- #
 HOMEPATH=`pwd`
 # Make project root
 if [ $PROJPATH = "pwd" ]
@@ -90,6 +72,8 @@ ABSPATH=`pwd` # Sets a variable to the absolute path of our project
 # `.gitkeep` files are to store the entire file structure in Git.
 touch LICENSE
 touch README.md
+mkdir assets
+  mkdir assets/figs
 mkdir data
   mkdir data/raw
     touch data/raw/.gitkeep
@@ -111,27 +95,20 @@ mkdir src
   mkdir src/visualization
 echo "# $PROJ Written by: $USER" >> README.md # Initialize README.md
 
-# ---------------------- Git details --------------------------- #
-# Determines if the user would like to turn this project into a Git repository
-echo "Would you like to initialize a local Git repo? (Y/N)"
-read GITCHECK
-if [ $GITCHECK = "Y" ]
-then
- echo "What is your GitHub username?
- If N/A, enter NONE"
- read GITNAME  # Used for details in the setup.py file in root directory.
- if [ $GITNAME = "NONE" ] # sets $GITNAME back to null if NONE
- then
-   unset $GITNAME
- fi
- git init
- # Sets up the .gitignore file with some standard extensions you likely dont want
- touch .gitignore
- echo ".DS_Store" >> .gitignore
- echo ".ipynb_checkpoints" >> .gitignore
-fi
-
 # -------------- Set up License based on previously set type ------------- #
+while [ $LICTYPE = "HELP" ]
+do
+  echo "Available license types are:
+  BSD,
+  MIT,
+  AGPL3,
+  GPL,
+  LGPL,
+  MOZILLA,
+  APACHE,
+  UNLICENSE"
+  read LICTYPE
+done
 if [ $LICTYPE = "BSD" ]
 then
   echo "Copyright (c) $YEAR, $USER
@@ -200,13 +177,6 @@ elif [ $LICTYPE == "UNLICENSE" ]
 then
   cat $HOMEPATH/licenses/unlicense.txt >> LICENSE
 else
-  # echo "$LICTYPE is not supported, would you like to try again?"
-  # read TRYAGAIN
-  # while [ $TRYAGAIN = "Y"] # Need to set up a check for $LICTYPE not in a list of values.
-  # do
-  #   read LICTYPE
-  #   if [ ! $LICTYPE ]
-  # done
   echo "License not initialized -- License Type: '$LICTYPE' is not currently supported"
 fi
 
@@ -236,23 +206,10 @@ then
   touch src/models/train.py
   touch src/visualization/visualize.py
 <<<<<<< HEAD
-
-  # Create template for setup.py file
-  if [ $GITNAME -n ]
-  then
-    echo "import os
-    from setuptools import setup, find_packages
-
-
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: https://github.com/$GITNAME/$PROJ'
-
-=======
   echo "import numpy as np
   import matplotlib.pyplot as plt" >> src/visualization/visualize.py
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 
 # Create template for setup.py file
 echo "import os
@@ -282,7 +239,7 @@ setup(
 )" >> setup.py
 
 <<<<<<< HEAD
->>>>>>> parent of 765db3b... reversion
+<<<<<<< HEAD
     setup(
         name='$PROJ',
         version='0.0.1',
@@ -294,7 +251,7 @@ setup(
         keywords='',
         # download_url='',
         packages=find_packages(),
-        install_requires=['scipy','numpy'],
+        install_requires=['scipy','numpy', 'matplotlib'],
         classifiers=[],
         include_package_data=True
     )" >> setup.py
@@ -321,25 +278,22 @@ setup(
         keywords='',
         # download_url='',
         packages=find_packages(),
-        install_requires=['scipy','numpy'],
+        install_requires=['scipy','numpy', 'matplotlib'],
         classifiers=[],
         include_package_data=True
     )" >> setup.py
     echo "Be sure to update the setup file with your dependencies and URL"
   fi
-<<<<<<< HEAD
-=======
 =======
 >>>>>>> parent of 8f393d8... Error handling, help responses
->>>>>>> parent of 765db3b... reversion
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 # --------------- Setup paths for preprocessing.py scripts --------------- #
   echo "input_path = $ABSPATH/data/raw" >> src/features/preprocessing.py
   echo "output_path = $ABSPATH/data/processed" >> src/features/preprocessing.py
 
 <<<<<<< HEAD
-=======
 <<<<<<< HEAD
->>>>>>> parent of 765db3b... reversion
 elif [ $TYPE = "NN" ]
 then
   echo "What back-end are you using for your NN?
@@ -357,18 +311,33 @@ then
   while [ ! $NNFRAME = "TF" ] && [ ! $NNFRAME = "TORCH" ]
   do
     echo "$NNFRAME is not a supported framework. Please enter a supported framework or type HELP for assistance"
+    read NNFRAME
+    while [ $NNFRAME = "HELP"]
+      echo "Currently supported frameworks are:
+      TF -- TensorFlow
+      TORCH -- PyTorch"
+      read NNFRAME
+    do
   done
 
   touch setup.py
+  mkdir src/utils
+  touch src/visualization/visualize.py
+  echo "import tensorflow as tf
+  import matplotlib.pyplot as plt" >> src/visualization/visualize.py
   touch src/models/layers.py
   if [ $GITNAME -n ]
   then
     if [ $NNFRAME = "TF" ]
     then
       touch src/models/model.py
+      echo "import tensorflow as tf" >> src/models/model.py
       touch src/models/nn.py
+      echo "import tensorflow as tf" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import tensorflow as tf" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import tensorflow as tf" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -391,16 +360,20 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
+          install_requires=['scipy','numpy', 'tensorflow', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
       touch src/models/model.py
+      echo "import torch" >> src/models/model.py
       touch src/models/nn.py
+      echo "import torch" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import torch" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import torch" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -423,7 +396,7 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
+          install_requires=['scipy','numpy', 'pytorch', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
@@ -432,9 +405,13 @@ then
     if [ $NNFRAME = "TF" ]
     then
       touch src/models/model.py
+      echo "import tensorflow as tf" >> src/models/model.py
       touch src/models/nn.py
+      echo "import tensorflow as tf" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import tensorflow as tf" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import tensorflow as tf" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -457,16 +434,20 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
+          install_requires=['scipy','numpy', 'tensorflow', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
       touch src/models/model.py
+      echo "import torch" >> src/models/model.py
       touch src/models/nn.py
+      echo "import torch" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import torch" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import torch" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -489,17 +470,28 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
+          install_requires=['scipy','numpy', 'pytorch', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
     fi
   fi
-<<<<<<< HEAD
-=======
 =======
 >>>>>>> parent of 8f393d8... Error handling, help responses
->>>>>>> parent of 765db3b... reversion
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
 else
-  echo "Something has gone wrong, you shouldn't be able to get here! Please re-run the script."
+  echo "Type: "$TYPE" is not supported yet, please open an issue at https://github.ubc.ca/ubc-mds-2017/DSCI522_lab1_script_tcroberts"
+fi
+
+# Determines if the user would like to turn this project into a Git repository
+echo "Would you like to initialize a local Git repo? (Y/N)"
+read GITCHECK
+if [ $GITCHECK = "Y" ]
+then
+ git init
+ # Sets up the .gitignore file with some standard extensions you likely dont want
+ touch .gitignore
+ echo ".DS_Store" >> .gitignore
+ echo ".ipynb_checkpoints" >> .gitignore
 fi
