@@ -9,7 +9,7 @@ def read(fname):
         return 'Please see: <insert_url_here>'
 
 setup(
-    name='test_proj',
+    name='test',
     version='0.0.1',
     author='Tyler Roberts',
     author_email='',

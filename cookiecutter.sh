@@ -13,19 +13,24 @@ then
   do
     echo "Error, no such directory, try again"
     read PROJPATH
-    if [ $PROJPATH = "pwd" ]
+    if [ $PROJPATH = "pwd" ]  #If the user decides they want the current wd, break.
     then
       break
     fi
   done
 fi
-echo "Is this project for Data Analysis (DA) or a Data Tool (DT)?"
-read TYPE # Determines the type of project you are creating
-echo "What type of license would you like to use? (BSD and MIT currently supported)."
-read LICTYPE # Reads in License Type. Currently only BSD Supported.
-YEAR=`date +%Y` # Sets a variable for te current year.
+echo "Is this project for Data Analysis (DA) or a Data Tool (DT)? (Packages coming soon)"
+read TYPE  # Determines the type of project you are creating
+while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]
+do
+  echo "$TYPE is not a currently supported project type"
+  read TYPE
+done
+echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
+read LICTYPE  # Reads in License Type. Currently BSD and MIT Supported.
+YEAR=`date +%Y`  # Sets a variable for the current year.
 # -------------------------------------------------------------------------- #
-
+HOMEPATH=`pwd`
 # Make project root
 if [ $PROJPATH = "pwd" ]
 then
@@ -63,6 +68,19 @@ mkdir src
 echo "# $PROJ Written by: $USER" >> README.md # Initialize README.md
 
 # -------------- Set up License based on previously set type ------------- #
+while [ $LICTYPE = "HELP" ]
+do
+  echo "Available license types are:
+  BSD,
+  MIT,
+  AGPL3,
+  GPL,
+  LGPL,
+  MOZILLA,
+  APACHE,
+  UNLICENSE"
+  read LICTYPE
+done
 if [ $LICTYPE = "BSD" ]
 then
   echo "Copyright (c) $YEAR, $USER
@@ -111,6 +129,25 @@ then
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE." >> LICENSE
+
+elif [ $LICTYPE = "AGPL3" ]
+then
+  cat $HOMEPATH/licenses/agpl3.txt >> LICENSE
+elif [ $LICTYPE = "GPL" ]
+then
+  cat $HOMEPATH/licenses/gpl.txt >> LICENSE
+elif [ $LICTYPE = "LGPL" ]
+then
+  cat $HOMEPATH/licenses/lgpl.txt >> LICENSE
+elif [ $LICTYPE == "MOZILLA" ]
+then
+  cat $HOMEPATH/licenses/mozilla.txt >> LICENSE
+elif [ $LICTYPE == "APACHE" ]
+then
+  cat $HOMEPATH/licenses/unlicense.txt >> LICENSE
+elif [ $LICTYPE == "UNLICENSE" ]
+then
+  cat $HOMEPATH/licenses/unlicense.txt >> LICENSE
 else
   echo "License not initialized -- License Type: '$LICTYPE' is not currently supported"
 fi
