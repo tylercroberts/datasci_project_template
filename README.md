@@ -10,7 +10,9 @@ There are no arguments fed to this script from the command line. All required in
   * NN Framework (if applicable).
 * Desired License Type
 * Initialize Git Repo
-  * GitHub Userame
+  * GitHub Username
+
+![](assets/fig/example_run.PNG)
 
 In all empty folders, a `.gitkeep` file is created upon initialization in order to ensure that all folders can be pushed to Git.
 
