@@ -210,6 +210,7 @@ then
   touch src/models/.gitkeep
   touch src/features/.gitkeep
   touch src/features/.gitkeep
+  echo "Done setting up data analysis files"
 
 elif [ $TYPE = "DT" ]
 then
@@ -225,6 +226,7 @@ then
   touch src/models/predict.py
   touch src/models/train.py
   touch src/visualization/visualize.py
+  echo "Done setting up data tool files"
 
   # Create template for setup.py file
   if [ $GITNAME -n ]
@@ -323,6 +325,7 @@ then
   touch src/utils/optimizers.py
   touch src/utils/utils.py
   touch src/visualization/visualize.py
+  echo "Done setting up neural net files."
 
   for file in src/dataio/*.py
   do
