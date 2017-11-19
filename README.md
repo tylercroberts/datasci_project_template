@@ -7,10 +7,11 @@ There are no arguments fed to this script from the command line. All required in
 * Project Title
 * Desired Path
 * Type of Project
+  * NN Framework (if applicable).
 * Desired License Type
 * Initialize Git Repo
-  * Git Name
- x
+  * GitHub Userame
+
 In all empty folders, a `.gitkeep` file is created upon initialization in order to ensure that all folders can be pushed to Git.
 
 The general directory structure is:
@@ -18,6 +19,9 @@ The general directory structure is:
 ├── LICENSE              <- Current supports automatically initializing MIT or BSD licenses
 ├── README.md            <- The top-level README for this project
 ├── .gitignore           <- .gitignore file if you wish to create a git repository. Only created if $GITCHECK == Y
+├── assets               <- All auxiliary files/images necessary for running.
+│   └── figs              <- Images for notebooks, etc.
+|
 ├── data
 │   ├── processing       <- Intermediate data that has been partly transformed, or still needs work.
 │   ├── processed        <- The final data, ready for input into analysis scripts.
@@ -77,4 +81,23 @@ Adds the following folders/files to the root of the project directory
         └── visualize.py    <- Creating graphics based on analysis of your model
 ```
 
-Written by Tyler Roberts on November 16th 2017
+#### NN:
+```
+├── setup.py              <- Adds NN framework to dependencies.
+|
+├── src
+|   |
+│   ├── utils             <- Additional utility functions necessary for the project.
+│   │   ├── optimizers.py    <- Functions for training steps with various optimizers.
+│   │   └── utils.py         <- All other necessary utilities for layers & training.
+|   |
+│   ├── models                           
+│   │   ├── model.py      <- Layer definitions & block setup.
+│   │   └── nn.py         <- Script to create graph & train/validate NN
+│   │
+│   └── visualization
+        └── visualize.py    <- Creating graphics based on analysis of your model
+```
+
+
+Written by Tyler Roberts on November 18th 2017

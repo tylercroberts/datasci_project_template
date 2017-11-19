@@ -42,6 +42,7 @@ do
       DA -- Data Analysis. Generally consist of interactive projects exploring a dataset,
       DT -- Data Tool. Packages or libraries for a solution to data problems.
       NN -- Coming soon. Specialized directory structure for building NN architectures/models."
+      read TYPE
     done
 done
 echo "What type of license would you like to use?
@@ -63,7 +64,9 @@ do
   read LICTYPE
 done
 YEAR=`date +%Y`  # Sets a variable for the current year.
-# -------------------------------------------------------------------------- #
+
+
+# ------------------------------ Begin Setup ------------------------------- #
 HOMEPATH=`pwd`
 # Make project root
 if [ $PROJPATH = "pwd" ]
@@ -80,6 +83,8 @@ ABSPATH=`pwd` # Sets a variable to the absolute path of our project
 # `.gitkeep` files are to store the entire file structure in Git.
 touch LICENSE
 touch README.md
+mkdir assets
+  mkdir assets/figs
 mkdir data
   mkdir data/raw
     touch data/raw/.gitkeep
@@ -225,6 +230,8 @@ then
   touch src/models/predict.py
   touch src/models/train.py
   touch src/visualization/visualize.py
+  echo "import numpy as np
+  import matplotlib.pyplot as plt" >> src/visualization/visualize.py
 
   # Create template for setup.py file
   if [ $GITNAME -n ]
@@ -250,7 +257,7 @@ then
         keywords='',
         # download_url='',
         packages=find_packages(),
-        install_requires=['scipy','numpy'],
+        install_requires=['scipy','numpy', 'matplotlib'],
         classifiers=[],
         include_package_data=True
     )" >> setup.py
@@ -277,7 +284,7 @@ then
         keywords='',
         # download_url='',
         packages=find_packages(),
-        install_requires=['scipy','numpy'],
+        install_requires=['scipy','numpy', 'matplotlib'],
         classifiers=[],
         include_package_data=True
     )" >> setup.py
@@ -304,18 +311,33 @@ then
   while [ ! $NNFRAME = "TF" ] && [ ! $NNFRAME = "TORCH" ]
   do
     echo "$NNFRAME is not a supported framework. Please enter a supported framework or type HELP for assistance"
+    read NNFRAME
+    while [ $NNFRAME = "HELP"]
+      echo "Currently supported frameworks are:
+      TF -- TensorFlow
+      TORCH -- PyTorch"
+      read NNFRAME
+    do
   done
 
   touch setup.py
+  mkdir src/utils
+  touch src/visualization/visualize.py
+  echo "import tensorflow as tf
+  import matplotlib.pyplot as plt" >> src/visualization/visualize.py
   touch src/models/layers.py
   if [ $GITNAME -n ]
   then
     if [ $NNFRAME = "TF" ]
     then
       touch src/models/model.py
+      echo "import tensorflow as tf" >> src/models/model.py
       touch src/models/nn.py
+      echo "import tensorflow as tf" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import tensorflow as tf" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import tensorflow as tf" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -338,16 +360,20 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
+          install_requires=['scipy','numpy', 'tensorflow', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
       touch src/models/model.py
+      echo "import torch" >> src/models/model.py
       touch src/models/nn.py
+      echo "import torch" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import torch" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import torch" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -370,7 +396,7 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
+          install_requires=['scipy','numpy', 'pytorch', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
@@ -379,9 +405,13 @@ then
     if [ $NNFRAME = "TF" ]
     then
       touch src/models/model.py
+      echo "import tensorflow as tf" >> src/models/model.py
       touch src/models/nn.py
+      echo "import tensorflow as tf" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import tensorflow as tf" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import tensorflow as tf" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -404,16 +434,20 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
+          install_requires=['scipy','numpy', 'tensorflow', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
       touch src/models/model.py
+      echo "import torch" >> src/models/model.py
       touch src/models/nn.py
+      echo "import torch" >> src/models/nn.py
       touch src/utils/optimizers.py
+      echo "import torch" >> src/utils/optimizers.py
       touch src/utils/utils.py
+      echo "import torch" >> src/utils/utils.py
 
       echo "import os
       from setuptools import setup, find_packages
@@ -436,7 +470,7 @@ then
           keywords='',
           # download_url='',
           packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
+          install_requires=['scipy','numpy', 'pytorch', 'matplotlib'],
           classifiers=[],
           include_package_data=True
       )" >> setup.py
