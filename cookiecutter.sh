@@ -230,7 +230,7 @@ then
   if [ $GITNAME -n ]
   then
     echo "import os
-    from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
     def read(fname):
@@ -257,10 +257,10 @@ then
     echo "Be sure to update the setup file with your dependencies"
   else
     echo "import os
-    from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
-    def read(fname):
+  def read(fname):
         try:
             return open(os.path.join(os.path.dirname(__file__), fname)).read()
         except:
@@ -305,143 +305,235 @@ then
   do
     echo "$NNFRAME is not a supported framework. Please enter a supported framework or type HELP for assistance"
   done
+  mkdir reports
+    mkdir reports/figures
+      touch reports/figures/.gitkeep
+  mkdir examples
+      touch examples/.gitkeep
+  mkdir src/utils
 
   touch setup.py
+  touch src/__init__.py
+  touch src/dataio/dataread.py
+  touch src/dataio/datadown.py
+  touch src/features/preprocessing.py
   touch src/models/layers.py
+  touch src/models/model.py
+  touch src/models/nn.py
+  touch src/utils/optimizers.py
+  touch src/utils/utils.py
+  touch src/visualization/visualize.py
+
+  for file in src/dataio/*.py
+  do
+    echo "import numpy as np
+    import os" >> $file
+  done
+
+
+
   if [ $GITNAME -n ]
   then
     if [ $NNFRAME = "TF" ]
     then
-      touch src/models/model.py
-      touch src/models/nn.py
-      touch src/utils/optimizers.py
-      touch src/utils/utils.py
+
+      for file in src/models/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+      for file in src/visualization/*.py
+      do
+        echo "import matplotlib.pyplot as plt
+import tensorflow as tf" >> $file
+      done
+      for file in src/utils/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+      for file in src/features/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+
+
+
+
 
       echo "import os
-      from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
-      def read(fname):
-          try:
-              return open(os.path.join(os.path.dirname(__file__), fname)).read()
-          except:
-              return 'Please see: https://github.com/$GITNAME/$PROJ'
+    def read(fname):
+        try:
+            return open(os.path.join(os.path.dirname(__file__), fname)).read()
+        except:
+            return 'Please see: https://github.com/$GITNAME/$PROJ'
 
-      setup(
-          name='$PROJ',
-          version='0.0.1',
-          author='$USER',
-          author_email='',
-          description='',
-          long_description=read('README.md'),
-          license='',
-          keywords='',
-          # download_url='',
-          packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
-          classifiers=[],
-          include_package_data=True
-      )" >> setup.py
+    setup(
+        name='$PROJ',
+        version='0.0.1',
+        author='$USER',
+        author_email='',
+        description='',
+        long_description=read('README.md'),
+        license='',
+        keywords='',
+        # download_url='',
+        packages=find_packages(),
+        install_requires=['scipy','numpy', 'tensorflow'],
+        classifiers=[],
+        include_package_data=True
+    )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
-      touch src/models/model.py
-      touch src/models/nn.py
-      touch src/utils/optimizers.py
-      touch src/utils/utils.py
+
+      for file in src/models/*.py
+      do
+        echo "import torch" >> $file
+      done
+      for file in src/visualization/*.py
+      do
+        echo "import matplotlib.pyplot as plt
+import torch" >> $file
+      done
+      for file in src/utils/*.py
+      do
+        echo "import torch" >> $file
+      done
+      for file in src/features/*.py
+      do
+        echo "import torch" >> $file
+      done
+
 
       echo "import os
-      from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
-      def read(fname):
-          try:
-              return open(os.path.join(os.path.dirname(__file__), fname)).read()
-          except:
-              return 'Please see: https://github.com/$GITNAME/$PROJ'
+    def read(fname):
+        try:
+            return open(os.path.join(os.path.dirname(__file__), fname)).read()
+        except:
+            return 'Please see: https://github.com/$GITNAME/$PROJ'
 
-      setup(
-          name='$PROJ',
-          version='0.0.1',
-          author='$USER',
-          author_email='',
-          description='',
-          long_description=read('README.md'),
-          license='',
-          keywords='',
-          # download_url='',
-          packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
-          classifiers=[],
-          include_package_data=True
-      )" >> setup.py
+    setup(
+        name='$PROJ',
+        version='0.0.1',
+        author='$USER',
+        author_email='',
+        description='',
+        long_description=read('README.md'),
+        license='',
+        keywords='',
+        # download_url='',
+        packages=find_packages(),
+        install_requires=['scipy','numpy', 'torch'],
+        classifiers=[],
+        include_package_data=True
+    )" >> setup.py
     fi
   else
     if [ $NNFRAME = "TF" ]
     then
-      touch src/models/model.py
-      touch src/models/nn.py
-      touch src/utils/optimizers.py
-      touch src/utils/utils.py
+
+      for file in src/models/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+      for file in src/visualization/*.py
+      do
+        echo "import matplotlib.pyplot as plt
+import tensorflow as tf" >> $file
+      done
+      for file in src/utils/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+      for file in src/features/*.py
+      do
+        echo "import tensorflow as tf" >> $file
+      done
+
 
       echo "import os
-      from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
-      def read(fname):
-          try:
-              return open(os.path.join(os.path.dirname(__file__), fname)).read()
-          except:
-              return 'Please see: <insert_url_here>'
+    def read(fname):
+        try:
+            return open(os.path.join(os.path.dirname(__file__), fname)).read()
+        except:
+            return 'Please see: <insert_url_here>'
 
-      setup(
-          name='$PROJ',
-          version='0.0.1',
-          author='$USER',
-          author_email='',
-          description='',
-          long_description=read('README.md'),
-          license='',
-          keywords='',
-          # download_url='',
-          packages=find_packages(),
-          install_requires=['scipy','numpy', 'tensorflow'],
-          classifiers=[],
-          include_package_data=True
-      )" >> setup.py
+    setup(
+        name='$PROJ',
+        version='0.0.1',
+        author='$USER',
+        author_email='',
+        description='',
+        long_description=read('README.md'),
+        license='',
+        keywords='',
+        # download_url='',
+        packages=find_packages(),
+        install_requires=['scipy','numpy', 'tensorflow'],
+        classifiers=[],
+        include_package_data=True
+    )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
-      touch src/models/model.py
-      touch src/models/nn.py
-      touch src/utils/optimizers.py
-      touch src/utils/utils.py
+
+      for file in src/models/*.py
+      do
+        echo "import torch" >> $file
+      done
+      for file in src/visualization/*.py
+      do
+        echo "import matplotlib.pyplot as plt
+        import torch" >> $file
+      done
+      for file in src/utils/*.py
+      do
+        echo "import torch" >> $file
+      done
+      for file in src/features/*.py
+      do
+        echo "import torch" >> $file
+      done
+
 
       echo "import os
-      from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 
-      def read(fname):
-          try:
-              return open(os.path.join(os.path.dirname(__file__), fname)).read()
-          except:
-              return 'Please see: <insert_url_here>'
+    def read(fname):
+        try:
+            return open(os.path.join(os.path.dirname(__file__), fname)).read()
+        except:
+            return 'Please see: <insert_url_here>'
 
-      setup(
-          name='$PROJ',
-          version='0.0.1',
-          author='$USER',
-          author_email='',
-          description='',
-          long_description=read('README.md'),
-          license='',
-          keywords='',
-          # download_url='',
-          packages=find_packages(),
-          install_requires=['scipy','numpy', 'pytorch'],
-          classifiers=[],
-          include_package_data=True
-      )" >> setup.py
+    setup(
+        name='$PROJ',
+        version='0.0.1',
+        author='$USER',
+        author_email='',
+        description='',
+        long_description=read('README.md'),
+        license='',
+        keywords='',
+        # download_url='',
+        packages=find_packages(),
+        install_requires=['scipy','numpy', 'torch'],
+        classifiers=[],
+        include_package_data=True
+    )" >> setup.py
     fi
   fi
 else
   echo "Something has gone wrong, you shouldn't be able to get here! Please re-run the script."
 fi
+
+# ------------ Exit Block. Gives time to read console if errors ------------ #
+
+echo "Please provide any input to exit."
+read LEAVE
