@@ -30,6 +30,10 @@ do
   NN -- Coming soon. Specialized directory structure for building NN architectures/models."
   read TYPE
 done
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of 765db3b... reversion
 while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]  && [ ! $TYPE = "NN" ]
 do
   echo "$TYPE is not a currently supported project type.
@@ -46,6 +50,12 @@ do
 done
 echo "What type of license would you like to use?
 (For a list of supported licenses, type HELP)."
+<<<<<<< HEAD
+=======
+=======
+echo "What type of license would you like to use? \n (For a list of supported licenses, type HELP)."
+>>>>>>> parent of 8f393d8... Error handling, help responses
+>>>>>>> parent of 765db3b... reversion
 read LICTYPE  # Reads in License Type. Currently BSD and MIT Supported.
 while [ $LICTYPE = "HELP" ]
 do
@@ -225,6 +235,7 @@ then
   touch src/models/predict.py
   touch src/models/train.py
   touch src/visualization/visualize.py
+<<<<<<< HEAD
 
   # Create template for setup.py file
   if [ $GITNAME -n ]
@@ -239,6 +250,39 @@ then
         except:
             return 'Please see: https://github.com/$GITNAME/$PROJ'
 
+=======
+  echo "import numpy as np
+  import matplotlib.pyplot as plt" >> src/visualization/visualize.py
+
+# Create template for setup.py file
+echo "import os
+from setuptools import setup, find_packages
+
+
+def read(fname):
+    try:
+        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    except:
+        return 'Please see: <insert_url_here>'
+
+setup(
+    name='$PROJ',
+    version='0.0.1',
+    author='$USER',
+    author_email='',
+    description='',
+    long_description=read('README.md'),
+    license='',
+    keywords='',
+    # download_url='',
+    packages=find_packages(),
+    install_requires=['scipy','numpy'],
+    classifiers=[],
+    include_package_data=True
+)" >> setup.py
+
+<<<<<<< HEAD
+>>>>>>> parent of 765db3b... reversion
     setup(
         name='$PROJ',
         version='0.0.1',
@@ -283,10 +327,19 @@ then
     )" >> setup.py
     echo "Be sure to update the setup file with your dependencies and URL"
   fi
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
+>>>>>>> parent of 765db3b... reversion
 # --------------- Setup paths for preprocessing.py scripts --------------- #
   echo "input_path = $ABSPATH/data/raw" >> src/features/preprocessing.py
   echo "output_path = $ABSPATH/data/processed" >> src/features/preprocessing.py
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of 765db3b... reversion
 elif [ $TYPE = "NN" ]
 then
   echo "What back-end are you using for your NN?
@@ -442,6 +495,11 @@ then
       )" >> setup.py
     fi
   fi
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 8f393d8... Error handling, help responses
+>>>>>>> parent of 765db3b... reversion
 else
   echo "Something has gone wrong, you shouldn't be able to get here! Please re-run the script."
 fi
