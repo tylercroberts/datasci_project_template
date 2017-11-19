@@ -298,7 +298,7 @@ then
     echo "Currently supported frameworks are:
     TF -- TensorFlow
     TORCH -- PyTorch"
-    read $NNFRAME
+    read NNFRAME
   done
 
   while [ ! $NNFRAME = "TF" ] && [ ! $NNFRAME = "TORCH" ]
