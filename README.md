@@ -87,15 +87,28 @@ Adds the following folders/files to the root of the project directory
 ```
 ├── setup.py              <- Adds NN framework to dependencies.
 |
+├── examples           <- Sample analysis, start-to-finish scripts on simple, clean data.
+|
+├── reports            <- Non-interactive reports (PDF, HTML, etc.)
+│   │
+│   └──figures         <- Figures for use with files in the reports directory
+|
 ├── src
+│   ├── dataio           
+│   │   ├── dataread.py
+│   │   └── datadown.py   <- Data downloading/API scraping script.
+│   │
+│   ├── features        
+│   │   └── preprocessing.py   <- Cleaning, transforming, and outputting data.
 |   |
 │   ├── utils             <- Additional utility functions necessary for the project.
 │   │   ├── optimizers.py    <- Functions for training steps with various optimizers.
 │   │   └── utils.py         <- All other necessary utilities for layers & training.
 |   |
 │   ├── models                           
-│   │   ├── model.py      <- Layer definitions & block setup.
-│   │   └── nn.py         <- Script to create graph & train/validate NN
+│   │   ├── model.py      <- Script to create computational graph.
+│   │   ├── layers.py     <- Layer definitions & block setup
+│   │   └── nn.py         <- Script to begin training & validation of NN
 │   │
 │   └── visualization
         └── visualize.py    <- Creating graphics based on analysis of your model
