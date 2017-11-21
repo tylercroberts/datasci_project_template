@@ -3,12 +3,16 @@
 # ---------------------- Initialize Setup Variables ------------------------ #
 echo "What is your name?"
 read USER # Will be used for generating default files
+
 echo "Hello, "$USER". What is your project's name? (no spaces please!)"
 read PROJ # Takes input, sets the project directory name
+
 echo "Please enter the path: (no '/' at the end). 'pwd' for present directory"
 read PROJPATH # Sets the path to the parent folder of your project
 if [ $PROJPATH != "pwd" ] # Error handling for mistyped/non-existent directories
 then
+  # -------------------- Check that the path exists ------------------------ #à
+
   while [ ! -d $PROJPATH ]
   do
     echo "Error, no such directory, try again"
@@ -19,6 +23,7 @@ then
     fi
   done
 fi
+
 echo "Is this project for Data Analysis (DA), a Data Tool (DT) or Neural Network (NN)?
 (For a list of all alternative project types, type HELP)"
 read TYPE  # Determines the type of project you are creating
@@ -27,7 +32,7 @@ do
   echo "Currently supported project types are:
   DA -- Data Analysis. Generally consist of interactive projects exploring a dataset,
   DT -- Data Tool. Packages or libraries for a solution to data problems.
-  NN -- Coming soon. Specialized directory structure for building NN architectures/models."
+  NN -- Neural Net. [In Progress] Specialized directory structure and building blocks for designing NN architectures/models."
   read TYPE
 done
 while [ ! "$TYPE" = "DA" ] && [ ! $TYPE = "DT" ]  && [ ! $TYPE = "NN" ]
@@ -41,7 +46,7 @@ do
       echo "Currently supported project types are:
       DA -- Data Analysis. Generally consist of interactive projects exploring a dataset,
       DT -- Data Tool. Packages or libraries for a solution to data problems.
-      NN -- Coming soon. Specialized directory structure for building NN architectures/models."
+      NN -- Neural Network. [In Progress] Specialized directory structure and building blocks for designing NN architectures/models."
     done
 done
 echo "What type of license would you like to use?
@@ -65,6 +70,8 @@ done
 YEAR=`date +%Y`  # Sets a variable for the current year.
 # -------------------------------------------------------------------------- #
 HOMEPATH=`pwd`
+
+
 # Make project root
 if [ $PROJPATH = "pwd" ]
 then
@@ -107,18 +114,30 @@ echo "Would you like to initialize a local Git repo? (Y/N)"
 read GITCHECK
 if [ $GITCHECK = "Y" ]
 then
- echo "What is your GitHub username?
- If N/A, enter NONE"
- read GITNAME  # Used for details in the setup.py file in root directory.
- if [ $GITNAME = "NONE" ] # sets $GITNAME back to null if NONE
- then
-   unset GITNAME
- fi
- git init
- # Sets up the .gitignore file with some standard extensions you likely dont want
- touch .gitignore
- echo ".DS_Store" >> .gitignore
- echo ".ipynb_checkpoints" >> .gitignore
+# -------------------- $GITNAME used for documentation ------------------- #
+  git init
+  # Sets up the .gitignore file with some standard extensions you likely dont want
+  touch .gitignore
+  echo ".DS_Store
+  .gitignore" >> .gitignore
+  echo "What is your GitHub username?
+  If N/A, enter NONE"
+  read GITNAME
+  echo "Do you already have a remote repository on GitHub for this project?"
+  read HUBCHECK
+  if [ $HUBCHECK = "Y" ]
+  then
+    git add .
+    git commit -m "Initial Commit"
+    echo "What is the URL?"
+    read GITURL
+    git remote add origin $GITURL
+    git push -u origin master
+  fi
+  if [ $GITNAME = "NONE" ] # sets $GITNAME back to null if NONE
+  then
+    unset GITNAME
+  fi
 fi
 
 # -------------- Set up License based on previously set type ------------- #
@@ -148,7 +167,6 @@ then
   ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." >> LICENSE
-
 elif [ $LICTYPE = "MIT" ]
 then
   echo "Copyright (c) $YEAR $USER
@@ -170,7 +188,6 @@ then
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE." >> LICENSE
-
 elif [ $LICTYPE = "AGPL3" ]
 then
   cat $HOMEPATH/licenses/agpl3.txt >> LICENSE
@@ -256,6 +273,7 @@ from setuptools import setup, find_packages
         classifiers=[],
         include_package_data=True
     )" >> setup.py
+
     echo "Be sure to update the setup file with your dependencies"
   else
     echo "import os
@@ -339,7 +357,12 @@ then
   then
     if [ $NNFRAME = "TF" ]
     then
+      # ----------- Automatically add some imports to .py files  ----------- #
 
+      # -- Seems to be a better way to iterate over all these files
+      #for f in */*.py **/*/*.py ; do
+        ...
+      #done;
       for file in src/models/*.py
       do
         echo "import tensorflow as tf" >> $file
@@ -389,6 +412,7 @@ from setuptools import setup, find_packages
     )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
+    # ----------- Automatically add some imports to .py files  ----------- #
 
       for file in src/models/*.py
       do
@@ -438,6 +462,7 @@ from setuptools import setup, find_packages
   else
     if [ $NNFRAME = "TF" ]
     then
+    # ----------- Automatically add some imports to .py files  ----------- #
 
       for file in src/models/*.py
       do
@@ -485,7 +510,7 @@ from setuptools import setup, find_packages
     )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
-
+      # ----------- Automatically add some imports to .py files  ----------- #
       for file in src/models/*.py
       do
         echo "import torch" >> $file
@@ -503,7 +528,6 @@ from setuptools import setup, find_packages
       do
         echo "import torch" >> $file
       done
-
 
       echo "import os
 from setuptools import setup, find_packages
@@ -530,6 +554,7 @@ from setuptools import setup, find_packages
         classifiers=[],
         include_package_data=True
     )" >> setup.py
+
     fi
   fi
 else
