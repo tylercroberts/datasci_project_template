@@ -141,7 +141,7 @@ then
     echo "
     What is the URL?"
     read GITURL
-    URLCHECk=`curl -s --head $GITURL | head -n 1 | grep "HTTP/1.[01] [23].."`
+    URLCHECK=`curl -s --head $GITURL | head -n 1 | grep "HTTP/1.[01] [23].."`
     if [ $URLCHECK -n ]
     then
       git remote add origin $GITURL

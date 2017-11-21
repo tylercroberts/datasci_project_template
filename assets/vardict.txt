@@ -1,0 +1,16 @@
+USER -- Name of the person running script
+
+PROJ -- Project Name
+PROJPATH -- (pwd or absolute path) Desired Project Path 
+TYPE -- (DA, DT, or NN) Type of project directory tree to intialize
+LICTYPE -- Open Source License to initialize
+YEAR -- Current Year
+HOMEPATH -- Absolute Path to cookiecutter.sh script (in order to find assets later)
+ABSPATH -- Absolute Path to project root
+
+GITCHECK -- (Y/N) Git Initialization
+GITNAME -- GitHub username
+HUBCHECK -- (Y/N) Does a remote repository already exist?
+GITURL -- URL to remote GitHub repository
+
+NNFRAME -- Deep Learning Framework to be used
