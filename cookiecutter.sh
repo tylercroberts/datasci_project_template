@@ -1,5 +1,14 @@
 #! C:\Program Files\Git\bin\bash
 
+
+# Tyler Roberts, Nov 21st 2017
+#
+# This script intializes a project directory structure (and potentially git repo) for a data science project
+# This script takes no command line arguments. All required details are asked for in the terminal during run-time.
+#
+# Usage: bash cookiecutter.sh
+
+
 # ---------------------- Initialize Setup Variables ------------------------ #
 echo "What is your name?"
 read USER # Will be used for generating default files
@@ -129,10 +138,17 @@ then
   then
     git add .
     git commit -m "Initial Commit"
-    echo "What is the URL?"
+    echo "
+    What is the URL?"
     read GITURL
-    git remote add origin $GITURL
-    git push -u origin master
+    URLCHECk=`curl -s --head $GITURL | head -n 1 | grep "HTTP/1.[01] [23].."`
+    if [ $URLCHECK -n ]
+    then
+      git remote add origin $GITURL
+      git push -u origin master
+    else
+      echo "Uh-oh. Something went wrong with the URL you entered. Repository not pushed to GitHub."
+    fi
   fi
   if [ $GITNAME = "NONE" ] # sets $GITNAME back to null if NONE
   then
