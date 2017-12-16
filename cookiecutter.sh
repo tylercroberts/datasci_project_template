@@ -346,6 +346,8 @@ then
     mkdir reports/figures
       touch reports/figures/.gitkeep
   mkdir examples
+      mkdir examples/figures
+        touch examples/figures/.gitkeep
       touch examples/.gitkeep
   mkdir src/utils
 
@@ -397,10 +399,6 @@ import tensorflow as tf" >> $file
       do
         echo "import tensorflow as tf" >> $file
       done
-
-
-
-
 
       echo "import os
 from setuptools import setup, find_packages
