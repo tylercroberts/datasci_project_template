@@ -237,8 +237,9 @@ fi
 if [ $TYPE = "DA" ]
 then
   mkdir reports
-    mkdir reports/figures
-      touch reports/figures/.gitkeep
+  mkdir results
+    mkdir results/figures
+      touch results/figures/.gitkeep
   touch src/dataio/.gitkeep
   touch src/models/.gitkeep
   touch src/features/.gitkeep
