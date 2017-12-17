@@ -51,8 +51,9 @@ The general directory structure is:
 Adds the following folders to the root of the project directory
 ```
 ├── reports            <- Non-interactive reports (PDF, HTML, etc.)
+├── results            <- Results of analysis/figures
 │   │
-│   └──figures         <- Figures for use with files in the reports directory
+│   └──figures         <- Figures for use in creating reports, etc.
 ```
 ##### DT:
 Adds the following folders/files to the root of the project directory
