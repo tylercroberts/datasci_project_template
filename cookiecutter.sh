@@ -1,11 +1,14 @@
 #! C:\Program Files\Git\bin\bash
 
-
-# Tyler Roberts, Nov 21st 2017
+# Tyler Roberts: Last updated on December 17th 2017
 #
-# This script intializes a project directory structure (and potentially git repo) for a data science project
-# This script takes no command line arguments. All required details are asked for in the terminal during run-time.
+# This script intializes a project directory structure (and potentially git repo) for a data science project.
 #
+# It takes no command line arguments. All required details are asked for in the terminal during run-time.
+#
+# You may need to update the first line in this script, to properly specify the path to your bash shell executible.
+#
+# If you encounter any bugs or errors, please open an issue at: https://www.github.com/tylercroberts/datasci_project_template
 # Usage: bash cookiecutter.sh
 
 
@@ -186,11 +189,12 @@ else
   read TRYAGAIN
   while [ $TRYAGAIN = "Y"] # Need to set up a check for $LICTYPE not in a list of values.
   do
+# ------------ Define contains. To test if an item is in a list ------------- #
   contains() {
-    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && exit(0) || exit(1)
+    [[ $1 =~ (^|[[:space:]])$2($|[[:space:]]) ]] && "True" || "False"
   }
      read LICTYPE
-     if [ contains "BSD MIT AGPL3 GPL LGPL MOZILLA APACHE UNLICENSE" $LICTYPE ]
+     if [ contains "BSD MIT AGPL3 GPL LGPL MOZILLA APACHE UNLICENSE" $LICTYPE == "True"]
      then
        if [ $LICTYPE = "BSD" ]
        then
@@ -420,5 +424,5 @@ fi
 
 # ------------ Exit Block. Gives time to read console if errors ------------ #
 
-echo "Please provide any input to exit."
+echo "Please provide any input to exit. Thank you for using this tool. Feel free to open an issue on GitHub if you encounter any problems."
 read LEAVE

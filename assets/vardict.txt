@@ -4,6 +4,7 @@ PROJ -- Project Name
 PROJPATH -- (pwd or absolute path) Desired Project Path 
 TYPE -- (DA, DT, or NN) Type of project directory tree to intialize
 LICTYPE -- Open Source License to initialize
+LICVALID -- If license type submitted is supported.
 YEAR -- Current Year
 HOMEPATH -- Absolute Path to cookiecutter.sh script (in order to find assets later)
 ABSPATH -- Absolute Path to project root
