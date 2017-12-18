@@ -253,35 +253,11 @@ then
   # Create template for setup.py file
   if [ $GITNAME -n ]
   then
-    cat setup_template_t>> setup.py
+    cat $HOMEPATH/assets/setup_template_git.txt >> setup.py
 
     echo "Be sure to update the setup file with your dependencies"
   else
-    echo "import os
-from setuptools import setup, find_packages
-
-
-  def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: <Insert URL Here>'
-
-    setup(
-        name='$PROJ',
-        version='0.0.1',
-        author='$USER',
-        author_email='',
-        description='',
-        long_description=read('README.md'),
-        license='',
-        keywords='',
-        # download_url='',
-        packages=find_packages(),
-        install_requires=['scipy','numpy'],
-        classifiers=[],
-        include_package_data=True
-    )" >> setup.py
+    cat $HOMEPATH/assets/setup_template.txt >> setup.py
     echo "Be sure to update the setup file with your dependencies and URL"
   fi
 # --------------- Setup paths for preprocessing.py scripts --------------- #
@@ -363,32 +339,7 @@ import tensorflow as tf" >> $file
       do
         echo "import tensorflow as tf" >> $file
       done
-
-      echo "import os
-from setuptools import setup, find_packages
-
-
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: https://github.com/$GITNAME/$PROJ'
-
-    setup(
-        name='$PROJ',
-        version='0.0.1',
-        author='$USER',
-        author_email='',
-        description='',
-        long_description=read('README.md'),
-        license='',
-        keywords='',
-        # download_url='',
-        packages=find_packages(),
-        install_requires=['scipy','numpy', 'tensorflow'],
-        classifiers=[],
-        include_package_data=True
-    )" >> setup.py
+      cat $HOMEPATH/assets/setup_template_git.txt >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
     # ----------- Automatically add some imports to .py files  ----------- #
@@ -411,32 +362,7 @@ import torch" >> $file
         echo "import torch" >> $file
       done
 
-
-      echo "import os
-from setuptools import setup, find_packages
-
-
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: https://github.com/$GITNAME/$PROJ'
-
-    setup(
-        name='$PROJ',
-        version='0.0.1',
-        author='$USER',
-        author_email='',
-        description='',
-        long_description=read('README.md'),
-        license='',
-        keywords='',
-        # download_url='',
-        packages=find_packages(),
-        install_requires=['scipy','numpy', 'torch'],
-        classifiers=[],
-        include_package_data=True
-    )" >> setup.py
+      cat $HOMEPATH/assets/setup_template_git.txt >> setup.py
     fi
   else
     if [ $NNFRAME = "TF" ]
@@ -461,32 +387,8 @@ import tensorflow as tf" >> $file
         echo "import tensorflow as tf" >> $file
       done
 
+      cat $HOMEPATH/assets/setup_template.txt >> setup.py
 
-      echo "import os
-from setuptools import setup, find_packages
-
-
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: <insert_url_here>'
-
-    setup(
-        name='$PROJ',
-        version='0.0.1',
-        author='$USER',
-        author_email='',
-        description='',
-        long_description=read('README.md'),
-        license='',
-        keywords='',
-        # download_url='',
-        packages=find_packages(),
-        install_requires=['scipy','numpy', 'tensorflow'],
-        classifiers=[],
-        include_package_data=True
-    )" >> setup.py
     elif [ $NNFRAME = "TORCH" ]
     then
       # ----------- Automatically add some imports to .py files  ----------- #
@@ -508,31 +410,7 @@ from setuptools import setup, find_packages
         echo "import torch" >> $file
       done
 
-      echo "import os
-from setuptools import setup, find_packages
-
-
-    def read(fname):
-        try:
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-        except:
-            return 'Please see: <insert_url_here>'
-
-    setup(
-        name='$PROJ',
-        version='0.0.1',
-        author='$USER',
-        author_email='',
-        description='',
-        long_description=read('README.md'),
-        license='',
-        keywords='',
-        # download_url='',
-        packages=find_packages(),
-        install_requires=['scipy','numpy', 'torch'],
-        classifiers=[],
-        include_package_data=True
-    )" >> setup.py
+      cat $HOMEPATH/assets/setup_template.txt >> setup.py
 
     fi
   fi
